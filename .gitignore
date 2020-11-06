@@ -1,0 +1,8 @@
+node_modules
+.idea
+
+.env.production
+.env.dev
+
+config/messages/*.txt
+!config/messages/default.txt
