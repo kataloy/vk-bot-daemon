@@ -3,9 +3,7 @@ const sleep = require('./utils/sleep');
 const runJob = require('./utils/runJob');
 const initApi = require('./utils/initApi');
 
-const DAY_MS = 12 * 60 * 60 * 1000;
-
-const MESSAGE = config.message;
+const INTERVAL = 2 * 60 * 60 * 1000;
 
 const api = initApi(config.vk.accessToken);
 
@@ -42,7 +40,7 @@ runJob(async () => {
 
     const nowDate = Date.now();
     const comments = await getComments(groupId, topicId);
-    const shouldWriteComment = !comments.find((item) => nowDate - item.date * 1000 < DAY_MS);
+    const shouldWriteComment = !comments.find((item) => nowDate - item.date * 1000 < INTERVAL);
 
     if (!shouldWriteComment) {
       console.log(
@@ -59,7 +57,7 @@ runJob(async () => {
     const result = await api('board.createComment', {
       group_id: groupId,
       topic_id: topicId,
-      message: MESSAGE,
+      message: config.message,
     });
 
     console.log(
@@ -67,4 +65,4 @@ runJob(async () => {
       result,
     );
   }
-}, 1000 * 60 * 1);
+}, 1000 * 60 * 10);
