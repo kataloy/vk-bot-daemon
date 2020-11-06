@@ -3,14 +3,14 @@ require('custom-env').env(process.env.NODE_ENV);
 const path = require('path');
 const fs = require('fs');
 
-const {NODE_ENV} = process.env;
+const { NODE_ENV } = process.env;
 
 const message = fs.readFileSync(
   path.resolve('config', 'messages', `${NODE_ENV || 'default'}.txt`),
-  'utf8'
+  'utf8',
 );
 
-let targets = [];
+const targets = [];
 
 for (const [key, value] of Object.entries(process.env)) {
   if (!key.includes('TARGET_')) continue;

@@ -11,4 +11,3 @@ const runJob = async (cb, interval) => {
 };
 
 module.exports = runJob;
-
